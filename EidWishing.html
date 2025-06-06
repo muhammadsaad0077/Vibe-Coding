@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eid ul Adha Wisher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    .glow-text {
+      text-shadow: 0 0 8px #ffcc00, 0 0 12px #ffcc00;
+    }
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .input-style {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 2px solid #ffd700;
+      border-radius: 1rem;
+      padding: 1rem;
+      width: 100%;
+      max-width: 320px;
+      color: white;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+    .input-style::placeholder {
+      color: #ffebb5;
+    }
+    .input-style:focus {
+      outline: none;
+      box-shadow: 0 0 15px #ffd700;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+
+  <div id="inputSection" class="space-y-8 mt-6 fade-in">
+    <h1 class="text-4xl font-bold glow-text">🌙 Eid ul Adha Wisher 🌙</h1>
+    <p class="text-lg italic text-yellow-100">Create a beautiful greeting for your loved ones</p>
+
+    <div class="space-y-4">
+      <input id="yourName" type="text" placeholder="🎉 Your Name" class="input-style" />
+      <input id="friendName" type="text" placeholder="🧑‍🤝‍🧑 Friend's Name" class="input-style" />
+    </div>
+
+    <button onclick="generateLink()" class="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-3 px-8 rounded-full shadow-lg transition-all">
+      ✨ Generate Wish Link
+    </button>
+
+    <div id="linkOutput" class="hidden flex flex-col items-center space-y-3">
+      <input id="generatedLink" class="p-2 text-black rounded w-80 text-center font-semibold" readonly />
+      <button onclick="copyLink()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow">
+        📋 Copy & Share
+      </button>
+    </div>
+  </div>
+
+  <div id="wishSection" class="hidden text-center space-y-4 mt-10 fade-in">
+    <h2 class="text-5xl font-bold glow-text">🕌 Eid ul Adha Mubarak! 🕌</h2>
+    <p id="wishMessage" class="text-2xl font-semibold italic mt-4"></p>
+    <div class="mt-6 animate-bounce text-yellow-400 text-4xl">
+      🌟🌙🐐🕋🎉
+    </div>
+    <div class="mt-8 text-base text-gray-200">
+      May this Eid bring peace, blessings and joy to you and your family 💖
+    </div>
+  </div>
+
+<script>
+function generateLink() {
+  const from = document.getElementById('yourName').value.trim();
+  const to = document.getElementById('friendName').value.trim();
+
+  if (!from || !to) {
+    alert("Please enter both names.");
+    return;
+  }
+
+  const url = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+  document.getElementById('generatedLink').value = url;
+  document.getElementById('linkOutput').classList.remove('hidden');
+}
+
+function copyLink() {
+  const link = document.getElementById('generatedLink');
+  link.select();
+  document.execCommand('copy');
+  alert("Link copied to clipboard 🎉");
+}
+
+function checkURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  const from = params.get('from');
+  const to = params.get('to');
+
+  if (from && to) {
+    document.getElementById('inputSection').style.display = 'none';
+    document.getElementById('wishSection').style.display = 'block';
+    document.getElementById('wishMessage').innerHTML = `<span class='text-yellow-300'>${from}</span> wishes you a joyful <span class='text-pink-300'>Eid ul Adha</span>, <span class='text-green-300'>${to}</span>! 🐐🌙`;
+
+    // Confetti Blast 🎉
+    setTimeout(() => {
+      confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } });
+    }, 500);
+  }
+}
+
+window.onload = checkURLParams;
+</script>
+</body>
+</html>
