@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(to bottom, #0f172a, #1e293b);
       color: white;
       font-family: 'Poppins', sans-serif;
     }
@@ -34,6 +34,41 @@
       font-size: 1rem;
       transition: box-shadow 0.3s ease;
     }
+
+    .btn-style {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffd700;
+    border-radius: 1rem;
+    padding: 14px;
+    width: 41%;
+    max-width: 209px;
+    color: white;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+    margin-top: 25px;
+    }
+
+    .btn-style-2 {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffd700;
+    border-radius: 1rem;
+    padding: 5px;
+    width: 41%;
+    max-width: 195px;
+    color: white;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+    margin-top: 25px;
+    }
+
+    .btn-style-3{
+      background: rgba(255, 255, 255, 0.15);
+    border: 2px solid #ffd700;
+    border-radius: 1rem;
+    color: gray;
+    }
     .input-style::placeholder {
       color: #ffebb5;
     }
@@ -41,11 +76,27 @@
       outline: none;
       box-shadow: 0 0 15px #ffd700;
     }
+
+    .card {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    body{
+      text-align: center;
+      margin-top: 100px;
+    }
+    .txt{
+      font-size: 24px;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
 
-  <div id="inputSection" class="space-y-8 mt-6 fade-in">
+  <div id="inputSection" class="space-y-8 flex items-center justify-center mt-6 fade-in">
     <h1 class="text-4xl font-bold glow-text">🌙 Eid ul Adha Wisher 🌙</h1>
     <p class="text-lg italic text-yellow-100">Create a beautiful greeting for your loved ones</p>
 
@@ -54,19 +105,19 @@
       <input id="friendName" type="text" placeholder="🧑‍🤝‍🧑 Friend's Name" class="input-style" />
     </div>
 
-    <button onclick="generateLink()" class="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-3 px-8 rounded-full shadow-lg transition-all">
+    <button onclick="generateLink()" class="btn-style">
       ✨ Generate Wish Link
     </button>
 
     <div id="linkOutput" class="hidden flex flex-col items-center space-y-3">
-      <input id="generatedLink" class="p-2 text-black rounded w-80 text-center font-semibold" readonly />
-      <button onclick="copyLink()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow">
+      <input id="generatedLink" class="btn-style-2" readonly />
+      <button onclick="copyLink()" class="btn-style-3 text-white px-4 py-2 rounded-full shadow">
         📋 Copy & Share
       </button>
     </div>
   </div>
 
-  <div id="wishSection" class="hidden text-center space-y-4 mt-10 fade-in">
+  <div id="wishSection" class="hidden txt text-center space-y-4 mt-10 fade-in">
     <h2 class="text-5xl font-bold glow-text">🕌 Eid ul Adha Mubarak! 🕌</h2>
     <p id="wishMessage" class="text-2xl font-semibold italic mt-4"></p>
     <div class="mt-6 animate-bounce text-yellow-400 text-4xl">
